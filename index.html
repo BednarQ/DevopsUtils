@@ -1,0 +1,42 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+</head>
+
+<body>
+Constants text which is added to final result<br/>
+<textarea rows="4" cols="50" id="constants">
+  Following stories are waiting for deploy to QA:
+</textarea><br/><br/>
+
+Text to be parsed<br/>
+<textarea rows="4" cols="50" id="test">
+</textarea><br/>
+
+<button onclick="parseMe(document.getElementById('test').value)" id="testButton" >Get parsed text</button>
+<br/><br/><br/><br/><br/>
+
+Parsed text<br/>
+<textarea rows="4" cols="50" id="output">
+</textarea>
+<br/>
+
+<script>
+    function parseMe(input){
+        var toReturn = '';
+        var regex = /REQ-\d{1,4}/g;
+        var numbers = input.match(regex);
+
+        var uniqueNumbers;
+        uniqueNumbers = numbers.filter(function(item, pos) {
+            return numbers.indexOf(item) == pos;
+        });
+        toReturn = document.getElementById('constants').value;
+        uniqueNumbers.forEach(e => toReturn += e +', ');
+        document.getElementById('output').value = toReturn.substring(0, toReturn.length - 2);
+    }
+</script>
+</body>
+
+</html>
