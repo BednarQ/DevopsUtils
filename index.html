@@ -27,13 +27,14 @@ Parsed text<br/>
         var toReturn = '';
         var regex = /REQ-\d{1,4}/g;
         var numbers = input.match(regex);
-
         var uniqueNumbers;
         uniqueNumbers = numbers.filter(function(item, pos) {
+
             return numbers.indexOf(item) == pos;
         });
         toReturn = document.getElementById('constants').value;
         uniqueNumbers.forEach(e => toReturn += e +', ');
+        toReturn = toReturn.replace(/REQ-/g,'');
         document.getElementById('output').value = toReturn.substring(0, toReturn.length - 2);
     }
 </script>
