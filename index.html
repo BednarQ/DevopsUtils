@@ -14,17 +14,21 @@ Text to be parsed<br/>
 <textarea rows="4" cols="50" id="test">
 </textarea><br/>
 
-<button onclick="parseMe(document.getElementById('test').value)" id="testButton" >Get parsed text</button>
+<input type="checkbox" name="removeREQ" id="reqCheckbox" checked> Get only requirement numbers.<br><br/>
+
+<button onclick="parseMe(document.getElementById('test').value)" id="testButton" >Parse text</button>
 <br/><br/><br/>
 
 Parsed text<br/>
 <textarea rows="4" cols="50" id="output">
 </textarea>
-<br/>
+<br/><br/>
+<button onclick="copyToClipboard()" id="copyToCLipboard" >Copy parsed text to clipboard</button>
 
 <script>
     function parseMe(input){
         var toReturn = '';
+
         var regex = /REQ-\d{1,4}/g;
         var numbers = input.match(regex);
         var uniqueNumbers;
@@ -34,8 +38,32 @@ Parsed text<br/>
         });
         toReturn = document.getElementById('constants').value;
         uniqueNumbers.forEach(e => toReturn += e +', ');
-        toReturn = toReturn.replace(/REQ-/g,'');
+        if(document.getElementById('reqCheckbox').checked){
+          toReturn = removeREQ(toReturn);
+        }
         document.getElementById('output').value = toReturn.substring(0, toReturn.length - 2);
+    }
+
+    function removeREQ(input){
+      return input.replace(/REQ-/g,'');
+    }
+
+    function copyToClipboard(){
+      var copyText = document.getElementById("output");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+      document.execCommand("copy");
+    }
+
+    function showHide(){
+      if(document.getElementById('customRegex').checked)
+      {
+        document.getElementById('regex').style.visibility='visible';
+      }
+      else
+      {
+        document.getElementById('regex').style.visibility='hidden';
+      }
     }
 </script>
 </body>
