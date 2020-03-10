@@ -12,6 +12,10 @@ function parseMe(input){
 
         return numbers.indexOf(item) == pos;
     });
+
+    if(document.getElementById('sortCheckbox').checked){
+        uniqueNumbers.sort();
+    }
     toReturn = document.getElementById('constants').value;
     uniqueNumbers.forEach(e => toReturn += e +', ');
     if(document.getElementById('reqCheckbox').checked){
