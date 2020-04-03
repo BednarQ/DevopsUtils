@@ -5,7 +5,7 @@ function init(){
 function parseMe(input){
     var toReturn = '';
 
-    var regex = /REQ-\d{1,4}/g;
+    var regex = /REQ-\d{1,5}/g;
     var numbers = input.match(regex);
     var uniqueNumbers;
     uniqueNumbers = numbers.filter(function(item, pos) {
